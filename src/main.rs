@@ -280,7 +280,7 @@ async fn main() -> std::io::Result<()> {
         }
     });
 
-    scheduler::schedule_versions(&mut scheduler, pool.clone());
+    // scheduler::schedule_versions(&mut scheduler, pool.clone()); // NOTE: Disabled to not push in DB Minecraft versions.
 
     let download_queue = Arc::new(DownloadQueue::new());
 
