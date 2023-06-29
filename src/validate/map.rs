@@ -1,7 +1,6 @@
 use crate::validate::{
     SupportedGameVersions, ValidationError, ValidationResult,
 };
-use chrono::{DateTime, NaiveDateTime, Utc};
 use std::io::Cursor;
 use zip::ZipArchive;
 
@@ -26,7 +25,7 @@ impl super::Validator for MapValidator {
         &self,
         archive: &mut ZipArchive<Cursor<bytes::Bytes>>,
     ) -> Result<ValidationResult, ValidationError> {
-        let have_yaml_file = archive.file_names().any(|filename| !filename.ends_with(".yaml") || !filename.ends_with(".yml"));
+        let have_yaml_file = archive.file_names().any(|filename| !filename.ends_with(".yaml") && !filename.ends_with(".yml"));
         if have_yaml_file {
             return Err(ValidationError::InvalidInput(
                 "Archive can contain only YAML files with maps.".into(),
