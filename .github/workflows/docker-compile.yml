@@ -18,7 +18,7 @@ jobs:
         id: docker_meta
         uses: docker/metadata-action@v3
         with:
-          images: ghcr.io/modrinth/labrinth
+          images: ghcr.io/CorvaxStation/labrinth
       -
         name: Login to GitHub Images
         uses: docker/login-action@v1
