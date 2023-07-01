@@ -25,10 +25,13 @@ impl super::Validator for BundleValidator {
         &self,
         archive: &mut ZipArchive<Cursor<bytes::Bytes>>,
     ) -> Result<ValidationResult, ValidationError> {
+        let valid_suffixes = [".yaml", ".yml", ".rsi", "meta.json", ".png", ".ogg"];
         for filename in archive.file_names() {
-            if !filename.ends_with(".yaml") || !filename.ends_with(".yml") || !filename.ends_with(".rsi") || !filename.ends_with("meta.json") || !filename.ends_with(".png") || !filename.ends_with(".ogg") {
+            if !valid_suffixes.iter().any(|suffix| filename.ends_with(suffix)) {
+                dbg!(filename);
+                dbg!(filename.ends_with(".png"));
                 return Err(ValidationError::InvalidInput(
-                    "Archive can contain only YAML files or RSI packs.".into(),
+                    "Archive can contain only YAML/OGG/PNG files or RSI packs.".into(),
                 ));
             }
         }
