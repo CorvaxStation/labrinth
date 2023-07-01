@@ -26,7 +26,7 @@ impl super::Validator for BundleValidator {
         archive: &mut ZipArchive<Cursor<bytes::Bytes>>,
     ) -> Result<ValidationResult, ValidationError> {
         for filename in archive.file_names() {
-            if !filename.ends_with(".yaml") || !filename.ends_with(".yml") || !filename.ends_with("meta.json") || !filename.ends_with(".png") || !filename.ends_with(".ogg") {
+            if !filename.ends_with(".yaml") || !filename.ends_with(".yml") || !filename.ends_with(".rsi") || !filename.ends_with("meta.json") || !filename.ends_with(".png") || !filename.ends_with(".ogg") {
                 return Err(ValidationError::InvalidInput(
                     "Archive can contain only YAML files or RSI packs.".into(),
                 ));
